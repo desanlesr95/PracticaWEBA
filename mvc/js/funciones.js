@@ -7,11 +7,18 @@ function acceso() {
 			$('#resulatdo').html("<img src='images/ajax.loader.gif' />");
 		},
 		success: function(resultado){
-			if($.trim(resultado)==='ok'){
-				location.reload(true);
+			console.log(resultado);
+			console.log("ok");
+			console.log((resultado=="ok"));
+			if(resultado!="error"){
+				console.log("si");
+				location.href="view/home.php";
 			}else{
-				$("#resultado").html("Error de acceso!");			}
+				$("#resultado").html("Error de acceso!");			
+			}
+		},
+		error:function(err){
+			console.log(err);
 		}
 	});
-	return false;
 }
