@@ -1,20 +1,25 @@
-<?php
-	include_once 'conexion.php';
+<?php 
 	session_start();
-	$user=$_POST['user'];
-	$pass=$_POST['pass'];
-	$sql=$conn->prepare("SELECT * from usuarios where username=? and contrasena=?");
-	$sql->bindParam(1,$user,PDO::PARAM_STR);
-	$sql->bindParam(2,md5($pass),PDO::PARAM_STR);
-	$sql->execute();
-	$row= $sql->fetch();
-	//var_dump($row);
-	if($row){
-		$_SESSION['conectado']=1;
-		$_SESSION['id_usuario']=$row['id_usuario'];
+	include_once 'conexion.php';
+	$user = $_POST['usuario'];
+	$passwd = $_POST['passwd'];
+	$passmd5 = md5($passwd);
+	$sql = $conn->prepare("select * from usuarios where username = ? and contrasena = ?");
+	$sql->bindParam(1, $user, PDO::PARAM_STR);
+	$sql->bindParam(2, $passmd5, PDO::PARAM_STR);
+	$sql->execute();	
+	if ($sql->rowCount() > 0 ){
+		while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
+			$_SESSION['mvc_conectado'] = 1;
+			$_SESSION['id_usuario'] = $rows['id_usuario'];
+			$_SESSION['id_rol'] = $rows['id_rol'];
+			$_SESSION['nombre'] = $rows['nombre'];
+			$_SESSION['apaterno'] = $rows['apellidop'];
+			$_SESSION['amaterno'] = $rows['apellidom'];
+		}
 		echo "ok";
 	}else{
-		$_SESSION['conectado']=0;
-		echo "error"; 	
+		$_SESSION['mvc_conectado'] = 0;
+		echo "Error";
 	}
- ?>
+?>
