@@ -27,7 +27,7 @@
 
           <br />
 
-		<?php include_once 'view/left_menu.php'; ?>
+		      <?php include_once 'view/left_menu.php'; ?>
 
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">

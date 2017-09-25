@@ -5,9 +5,9 @@
 	  <ul class="nav side-menu">
 		<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 		  <ul class="nav child_menu" style="display: none">
-			<li onclick="menu(101);">Total de usuarios</li>
-			<li onclick="menu(102);">Total de usuarios</li>
-			<li onclick="menu(103);">Total de usuarios</li>
+			<li onclick="menu(101);">Nuevo usuario</li>
+			<li onclick="menu(102);">Lista de usuarios</li>
+			<li onclick="menu(103);">Grafica de usuarios</li>
 		  </ul>
 		</li>
 	  </ul>
