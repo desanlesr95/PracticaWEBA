@@ -24,6 +24,129 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editar Usuario</h4>
+      </div>
+      <div class="modal-body">
+        <div class="x_content">
+
+          <form class="form-horizontal form-label-left" novalidate method="POST" id="frm_update">
+
+
+            <span class="section">Personal Info</span>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="nombre" class="form-control col-md-7 col-xs-12"  data-validate-words="1" name="nombre" placeholder="Nombre" required="required" type="text">
+              </div>
+            </div>
+
+
+
+           <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Apellido paterno <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="apellidop" class="form-control col-md-7 col-xs-12" data-validate-words="1" name="apellidop" placeholder="Apellido paterno" required="required" type="text">
+              </div>
+            </div>
+
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Apellido materno <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="apellidom" class="form-control col-md-7 col-xs-12"  data-validate-words="1" name="apellidom" placeholder="Apellido Materno" required="required" type="text">
+              </div>
+            </div>
+
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Rol <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="id_rol" class="form-control col-md-7 col-xs-12" name="id_rol" placeholder="Rol" required="required" type="number" data-validate-minmax="100,110">
+              </div>
+            </div>
+
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Username <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="username" placeholder="Username" required="required" type="text">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Contraseña actual<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="contrasena" class="form-control col-md-7 col-xs-12" name="contrasena" placeholder="Contraseña" required="required" type="password">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Contraseña <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="contrasenaN" class="form-control col-md-7 col-xs-12" name="contrasenaN" placeholder="Contraseña" required="required" type="password">
+              </div>
+            </div>
+
+
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Repetir contraseña <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="contrasena2N" class="form-control col-md-7 col-xs-12" name="contrasena2N" placeholder="Repetir contraseña" required="required" type="password">
+              </div>
+              </div>
+
+             <div class="item form-group">
+              <div class="col-md-offset-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-xs-6 col-md-6">
+                  <input id="radio" class="form-control col-md-7 col-xs-12" name="group" required="required" type="radio" value="A">Activo
+                </div>
+                <div class="col-xs-6 col-md-6">
+                  <input id="radio" class="form-control col-md-7 col-xs-12" name="group" required="required" type="radio" value="I">Inactivo 
+                </div>
+              </div> 
+            </div> 
+
+            <INPUT type="hidden" name="id" id="id"> 
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+                <button id="send" type="submit" class="btn btn-success">Guardar</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <!-- Datatables -->
         <!-- <script src="js/datatables/js/jquery.dataTables.js"></script>
   <script src="js/datatables/tools/js/dataTables.tableTools.js"></script> -->
@@ -79,6 +202,16 @@
         }
       }
     }();
+
+
+    $('form').submit(function(e) {
+      e.preventDefault();
+
+
+        update();
+      return false;
+    });
+
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -86,8 +219,6 @@
     $('#datatable-keytable').DataTable({
       keys: true
     });
-    $('#datatable-responsive').DataTable();
-    $('#datatable-scroller').DataTable({
       ajax: "js/datatables/json/scroller-demo.json",
       deferRender: true,
       scrollY: 380,
@@ -100,3 +231,4 @@
   });
   TableManageButtons.init();
 </script>
+

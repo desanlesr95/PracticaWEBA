@@ -80,13 +80,12 @@ function getUsers(){
         cod+="<td>"+content[3][i]+"</td>";
         cod+="<td>"+content[4][i]+"</td>";
         cod+="<td>"+botonStatus(content[5][i])+"</td>";
-        cod+="<td><a onclick='update()'><i class='fa fa-pencil-square-o'></i></td>";
+        cod+="<td><a onclick='edit("+content[6][i]+")' data-toggle='modal' data-target='#myModal'><i class='fa fa-pencil-square-o'></i></td>";
         cod+="</tr>";
     }
 
     $('#usuariosTable').html(cod); 
     }
-
 
     return false;
 }
@@ -98,4 +97,49 @@ function botonStatus(status){
     else{
         return "<button type='button' class='btn btn-danger'>Inactivo</button>";
     }
+}
+
+function edit(id){
+    var content;
+    $.ajax({
+    type: "POST",
+    url: "model/usuarios/usuarioByID.php",
+    data: {id_usuario:id},
+    beforeSend: function(){
+    },    
+    success: function(resultado){
+        content = JSON.parse(resultado);
+        //console.log(resultado);
+        console.log(content);
+        $('#nombre').val(content.nombre);
+        $('#apellidop').val(content.apellidop);
+        $('#apellidom').val(content.apellidom);
+        $('#id_rol').val(content.id_rol);
+        $('#username').val(content.username);
+        $('#id').val(content.id_usuario);
+    }
+    });   
+}
+
+
+
+function update(){
+    console.log($("#frm_update").serialize());
+    $.ajax({
+    type: "POST",
+    url: "model/usuarios/updateUsuario.php",
+    data: $("#frm_update").serialize(),
+    beforeSend: function(){
+        $("#page-body").html("<img src='images/ajax-loader.gif'>");
+    },    
+    success: function(resultado){
+        console.log(resultado);
+        if ($.trim(resultado) === 'ok'){
+              menu(102);  
+        }else{
+            $("#page-body").html("Error de registro");
+        }        
+    }
+    });    
+    return false;
 }

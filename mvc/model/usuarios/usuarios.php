@@ -3,14 +3,16 @@ include_once "../conexion.php";
 $sql = $conn->prepare("select * from usuarios");
 $sql->execute();  
 $row=[];
-$i=0;
+
 $nombres=[];
 $apellidop=[];
 $apellidom=[];
 $id_rol=[];
 $username=[];
 $status=[];
+$ids=[];
 $html;
+$i=0;
 
 if ($sql->rowCount() > 0 ){   
   while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
@@ -20,6 +22,7 @@ if ($sql->rowCount() > 0 ){
       $id_rol[$i]=$rows['id_rol'];
       $username[$i]=$rows['username'];
       $status[$i]=$rows['status'];
+      $ids[$i]=$rows['id_usuario'];
       $i++;
   }
 }
@@ -29,5 +32,6 @@ $row[2]=$apellidom;
 $row[3]=$id_rol;
 $row[4]=$username;
 $row[5]=$status;
+$row[6]=$ids;
 echo json_encode($row);
 ?>
