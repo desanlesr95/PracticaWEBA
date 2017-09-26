@@ -4,7 +4,7 @@
 	$user = $_POST['usuario'];
 	$passwd = $_POST['passwd'];
 	$passmd5 = md5($passwd);
-	$sql = $conn->prepare("select * from usuarios where username = ? and contrasena = ?");
+	$sql = $conn->prepare("select * from usuarios where username = ? and contrasena = ? and status='A'");
 	$sql->bindParam(1, $user, PDO::PARAM_STR);
 	$sql->bindParam(2, $passmd5, PDO::PARAM_STR);
 	$sql->execute();	

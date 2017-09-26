@@ -23,7 +23,7 @@ if ($passwordn==$password2N) {
 		$sql->bindParam(5,$username,PDO::PARAM_STR);
 		$sql->bindParam(6,$md5pass,PDO::PARAM_STR);
 		$sql->bindParam(7,$status,PDO::PARAM_STR);
-		$sql->bindParam(8,$id,PDO::PARAM_STR);
+		$sql->bindParam(8,$id,PDO::PARAM_INT);
 		$sql->bindParam(9,$md5pass2,PDO::PARAM_STR);
 		$sql->execute();
 		echo "ok";

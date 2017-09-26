@@ -120,7 +120,7 @@
              <div class="item form-group">
               <div class="col-md-offset-4 col-md-6 col-sm-6 col-xs-12">
                 <div class="col-xs-6 col-md-6">
-                  <input id="radio" class="form-control col-md-7 col-xs-12" name="group" required="required" type="radio" value="A">Activo
+                  <input id="radio" class="form-control col-md-7 col-xs-12" name="group" required="required" type="radio" value="A" checked="true">Activo
                 </div>
                 <div class="col-xs-6 col-md-6">
                   <input id="radio" class="form-control col-md-7 col-xs-12" name="group" required="required" type="radio" value="I">Inactivo 

@@ -57,7 +57,7 @@ function guardarUsuario(){
 
 function getUsers(){
     var content;
-
+    console.log("getUsers");
     $.ajax({
     type: "POST",
     url: "model/usuarios/usuarios.php",
