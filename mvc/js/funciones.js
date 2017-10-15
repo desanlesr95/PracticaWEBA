@@ -24,10 +24,7 @@ function menu(opcion){
     data: {opt_form: opcion},
     beforeSend: function(){
         $("#page-body").html("<img src='images/ajax-loader.gif'>");
-        if (opcion==102) {
-            getUsers();
-        }
-    },    
+   },    
     success: function(resultado){
         $("#page-body").html(resultado);        
     }
@@ -54,10 +51,9 @@ function guardarUsuario(){
     });    
     return false;
 }
+var contenido=[];
 
 function getUsers(){
-    var content;
-    console.log("getUsers");
     $.ajax({
     type: "POST",
     url: "model/usuarios/usuarios.php",
@@ -66,29 +62,29 @@ function getUsers(){
         $("#page-body").html("<img src='images/ajax-loader.gif'>");
     },    
     success: function(resultado){
-        content = JSON.parse(resultado);
-        crearTabla();
-    }
-    });   
-    function crearTabla() {
-    var cod="";
-    for(var i=0;i<content[0].length;i++){
-        cod+="<tr>";
-        cod+="<td>"+content[0][i]+"</td>";
-        cod+="<td>"+content[1][i]+"</td>";
-        cod+="<td>"+content[2][i]+"</td>";
-        cod+="<td>"+content[3][i]+"</td>";
-        cod+="<td>"+content[4][i]+"</td>";
-        cod+="<td>"+botonStatus(content[5][i])+"</td>";
-        cod+="<td><a onclick='edit("+content[6][i]+")' data-toggle='modal' data-target='#myModal'><i class='fa fa-pencil-square-o'></i></td>";
-        cod+="</tr>";
-    }
+        return resultado;
+				}
+    });
+} 
+   
 
-    $('#usuariosTable').html(cod); 
-    }
-
-    return false;
+function newSolicitud(){
+	console.log($("#frm_newSolicitud").serialize());
+		$.ajax({
+    type: "POST",
+    url: "model/solicitudes/crearSolicitud.php",
+    data:  $("#frm_newSolicitud").serialize(),
+    beforeSend: function(){
+        $("#page-body").html("<img src='images/ajax-loader.gif'>");
+    },    
+    success: function(resultado){
+    				console.log(resultado);
+        menu(202);
+				}
+    });
 }
+
+
 
 function botonStatus(status){
     if(status=='A'){
@@ -129,6 +125,27 @@ function update(){
     type: "POST",
     url: "model/usuarios/updateUsuario.php",
     data: $("#frm_update").serialize(),
+    beforeSend: function(){
+        $("#page-body").html("<img src='images/ajax-loader.gif'>");
+    },    
+    success: function(resultado){
+        console.log(resultado);
+        if ($.trim(resultado) === 'ok'){
+              menu(102);  
+        }else{
+            $("#page-body").html("Error de registro");
+        }        
+    }
+    });    
+    return false;
+}
+
+
+function terminar_sol(id_solicitud){
+			 $.ajax({
+    type: "POST",
+    url: "model/solicitudes/terminarSol.php",
+    data: {id_solicitud: id_solicitud},
     beforeSend: function(){
         $("#page-body").html("<img src='images/ajax-loader.gif'>");
     },    

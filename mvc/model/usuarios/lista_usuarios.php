@@ -1,3 +1,7 @@
+<?php 
+include_once "usuarios.php";
+ ?>
+
 <div class="col-md-12 col-sm-12 col-xs-12"">
   <div class="x_panel">
     <div class="x_title">
@@ -18,6 +22,60 @@
           </tr>
         </thead>
         <tbody id="usuariosTable">
+
+            <?php 
+            //100 Administrador
+            //101 Lider
+            //102 Responsable
+            //103 Colaborador
+            function rol($rol)
+            {
+              switch ($rol) {
+                case 100:
+                 return '<span class="label label-primary">Administrador</span>';
+                  break;
+                case 101:
+                 return '<span class="label label-success">Lider</span>';
+                  break;
+                case 102:
+                 return '<span class="label label-info">Responsable</span>';
+                  break;
+                case 103:
+                 return 'span class="label label-warning">Colaborador</span>';
+                  break;
+                default:
+                  break;
+              }
+            }
+
+            function status($status)
+            {
+              switch ($status) {
+                case 'A':
+                 return '<span class="label label-success">Activo</span>';
+                  break;
+                case 'I':
+                 return '<span class="label label-danger">Inactivo</span>';
+                  break;
+                default:
+                  break;
+              }
+            }
+
+              if ($sql->rowCount() > 0 ){   
+                while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
+                    echo "<tr>
+                        <td>".$rows['nombre']."</td>
+                        <td>".$rows['apellidop']."</td>
+                        <td>".$rows['apellidom']."</td>
+                        <td>".rol($rows['id_rol'])."</td>
+                        <td>".$rows['username']."</td>
+                        <td>".status($rows['status'])."</td>
+                        <td><button id='".$rows['id_usuario']."'>Editar</button></td>
+                    </tr>";
+                }
+              }
+            ?>
         
         </tbody>
       </table>
@@ -231,4 +289,25 @@
   });
   TableManageButtons.init();
 </script>
-
+<script>
+    $(document).ready(function(){
+      crearTabla();
+      function crearTabla() {
+         var cod="";
+         var contenido=getUsers();
+         for(var i=0;i<contenido[0].length;i++){
+             cod+="<tr>";
+             cod+="<td>"+contenido[0][i]+"</td>";
+             cod+="<td>"+contenido[1][i]+"</td>";
+             cod+="<td>"+contenido[2][i]+"</td>";
+             cod+="<td>"+contenido[3][i]+"</td>";
+             cod+="<td>"+contenido[4][i]+"</td>";
+             cod+="<td>"+botonStatus(contenido[5][i])+"</td>";
+             cod+="<td><a onclick='edit("+contenido[6][i]+")' data-toggle='modal' data-target='#myModal'><i class='fa fa-pencil-square-o'></i></td>";
+             cod+="</tr>";
+         }
+         console.log(cod);
+         $('#usuariosTable').html(cod); 
+      }
+    });
+  </script>
